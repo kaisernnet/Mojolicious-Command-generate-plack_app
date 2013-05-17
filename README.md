@@ -1,10 +1,13 @@
 # NAME
 
-Mojolicious::Command::generate::plack\_app - It's new $module
+Mojolicious::Command::generate::plack\_app - Plack App generator command
 
 # SYNOPSIS
 
     use Mojolicious::Command::generate::plack_app;
+
+    my $app = Mojolicious::Command::generate::plack->new;
+    $app->run(@ARGV);
 
 # DESCRIPTION
 

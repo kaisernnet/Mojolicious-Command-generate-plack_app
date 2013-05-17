@@ -1,5 +1,5 @@
 {
-   "abstract" : "It's new $module",
+   "abstract" : "Plack App generator command",
    "author" : [
       "kaisernnet <kaisernnet@gmail.com>"
    ],
@@ -42,7 +42,8 @@
       },
       "runtime" : {
          "requires" : {
-            "perl" : "5.008005"
+            "Mojolicious" : "4.0",
+            "perl" : "5.008001"
          }
       },
       "test" : {
