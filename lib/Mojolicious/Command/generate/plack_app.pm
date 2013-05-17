@@ -97,17 +97,25 @@ builder {
 #!/bin/bash
 
 case $1 in
-    debug)
-        carton exec -Ilib -- plackup -p 8080 \\
-        -E development -R lib,templates script/<%= $name %>.psgi
-        ;;
     start)
         carton exec -Ilib -- starman -p 8080 \\
         -E deployment --workers 5 -MMojolicious \\
         script/<%= $name %>.psgi
         ;;
+    stop)
+        echo 'stop is not implemented yet.'
+        echo
+        echo 'For now, press Ctl-C to stop.'
+        ;;
+    test)
+        carton exec -Ilib -- prove -c --trap t
+        ;;
+    debug)
+        carton exec -Ilib -- plackup -p 8080 \\
+        -E development -R lib,templates script/<%= $name %>.psgi
+        ;;
     *)
-        echo "Usage: $0 start|stop|debug"
+        echo "Usage: $0 start|stop|test|debug"
         ;;
 esac
 
