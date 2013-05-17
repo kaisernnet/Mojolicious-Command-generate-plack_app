@@ -202,15 +202,26 @@ body {
 
 @@ test
 % my $class = shift;
-use Mojo::Base -strict;
-
 use Test::More;
-use Test::Mojo;
+use Plack::Test;
 
-my $t = Test::Mojo->new('<%= $class %>');
-$t->get_ok('/')->status_is(200)->content_like(qr/Mojolicious/i);
+use Mojo::Server::PSGI;
+use <%= $class %>;
 
-done_testing();
+my $server = Mojo::Server::PSGI->new( app => <%= $class %>->new );
+
+test_psgi $server->to_psgi_app => sub {
+    my $cb = shift;
+
+    my $req = HTTP::Request->new(GET => 'http://localhost/');
+    my $res = $cb->($req);
+
+    is $res->content_type, 'text/html';
+    is $res->code, 200;
+    like $res->content, qw/Mojolicious/i;
+};
+
+done_testing;
 
 @@ import
   <header><h1><%%= title %></h1></header>
